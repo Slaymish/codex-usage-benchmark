@@ -71,13 +71,18 @@ def validate(data: object) -> dict:
             raise InvalidReport("cached tokens exceed input tokens")
         if row["reasoning_output_tokens"] > row["output_tokens"]:
             raise InvalidReport("reasoning tokens exceed output tokens")
-        if row["total_tokens"] and row["total_tokens"] < row["input_tokens"] + row["output_tokens"]:
+        if row["input_tokens"] + row["output_tokens"] > 2**53 - 1 or (row["total_tokens"] and row["total_tokens"] < row["input_tokens"] + row["output_tokens"]):
             raise InvalidReport("total tokens less than input plus output")
         sessions += row["sessions"]
-    if sessions != data["summary"]["usableSessions"]:
+    if sessions > 2**53 - 1 or sessions != data["summary"]["usableSessions"]:
         raise InvalidReport("session count mismatch")
-    if data["summary"]["filesInspected"] < sessions or data["summary"]["skippedFiles"] > data["summary"]["filesInspected"]:
+    if data["summary"]["filesInspected"] < sessions or data["summary"]["skippedFiles"] > data["summary"]["filesInspected"] - sessions:
         raise InvalidReport("inconsistent file counts")
+    if data["summary"]["snapshotsFound"] < sessions:
+        raise InvalidReport("fewer snapshots than usable sessions")
+    for field in ("input_tokens", "output_tokens"):
+        if sum(row[field] for row in buckets) > 2**53 - 1:
+            raise InvalidReport("aggregate token sum exceeds safe integer limit")
     return data
 
 

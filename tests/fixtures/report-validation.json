@@ -1,0 +1,422 @@
+[
+  {
+    "name": "valid",
+    "valid": true,
+    "report": {
+      "schemaVersion": 1,
+      "collectorVersion": "0.1.0",
+      "dataType": "aggregate_token_usage",
+      "privacy": "monthly-model-aggregates",
+      "summary": {
+        "filesInspected": 1,
+        "usableSessions": 1,
+        "snapshotsFound": 2,
+        "skippedFiles": 0
+      },
+      "buckets": [
+        {
+          "month": "2026-10",
+          "model": "gpt-6.1-sol",
+          "sessions": 1,
+          "input_tokens": 100,
+          "cached_input_tokens": 20,
+          "output_tokens": 30,
+          "reasoning_output_tokens": 10,
+          "total_tokens": 130
+        }
+      ]
+    }
+  },
+  {
+    "name": "month:0000-10",
+    "valid": false,
+    "report": {
+      "schemaVersion": 1,
+      "collectorVersion": "0.1.0",
+      "dataType": "aggregate_token_usage",
+      "privacy": "monthly-model-aggregates",
+      "summary": {
+        "filesInspected": 1,
+        "usableSessions": 1,
+        "snapshotsFound": 2,
+        "skippedFiles": 0
+      },
+      "buckets": [
+        {
+          "month": "0000-10",
+          "model": "gpt-6.1-sol",
+          "sessions": 1,
+          "input_tokens": 100,
+          "cached_input_tokens": 20,
+          "output_tokens": 30,
+          "reasoning_output_tokens": 10,
+          "total_tokens": 130
+        }
+      ]
+    }
+  },
+  {
+    "name": "month:2026-10\n",
+    "valid": false,
+    "report": {
+      "schemaVersion": 1,
+      "collectorVersion": "0.1.0",
+      "dataType": "aggregate_token_usage",
+      "privacy": "monthly-model-aggregates",
+      "summary": {
+        "filesInspected": 1,
+        "usableSessions": 1,
+        "snapshotsFound": 2,
+        "skippedFiles": 0
+      },
+      "buckets": [
+        {
+          "month": "2026-10\n",
+          "model": "gpt-6.1-sol",
+          "sessions": 1,
+          "input_tokens": 100,
+          "cached_input_tokens": 20,
+          "output_tokens": 30,
+          "reasoning_output_tokens": 10,
+          "total_tokens": 130
+        }
+      ]
+    }
+  },
+  {
+    "name": "model:model\n",
+    "valid": false,
+    "report": {
+      "schemaVersion": 1,
+      "collectorVersion": "0.1.0",
+      "dataType": "aggregate_token_usage",
+      "privacy": "monthly-model-aggregates",
+      "summary": {
+        "filesInspected": 1,
+        "usableSessions": 1,
+        "snapshotsFound": 2,
+        "skippedFiles": 0
+      },
+      "buckets": [
+        {
+          "month": "2026-10",
+          "model": "model\n",
+          "sessions": 1,
+          "input_tokens": 100,
+          "cached_input_tokens": 20,
+          "output_tokens": 30,
+          "reasoning_output_tokens": 10,
+          "total_tokens": 130
+        }
+      ]
+    }
+  },
+  {
+    "name": "model:m\u00f6d\u00ebl",
+    "valid": false,
+    "report": {
+      "schemaVersion": 1,
+      "collectorVersion": "0.1.0",
+      "dataType": "aggregate_token_usage",
+      "privacy": "monthly-model-aggregates",
+      "summary": {
+        "filesInspected": 1,
+        "usableSessions": 1,
+        "snapshotsFound": 2,
+        "skippedFiles": 0
+      },
+      "buckets": [
+        {
+          "month": "2026-10",
+          "model": "m\u00f6d\u00ebl",
+          "sessions": 1,
+          "input_tokens": 100,
+          "cached_input_tokens": 20,
+          "output_tokens": 30,
+          "reasoning_output_tokens": 10,
+          "total_tokens": 130
+        }
+      ]
+    }
+  },
+  {
+    "name": "sessions:True",
+    "valid": false,
+    "report": {
+      "schemaVersion": 1,
+      "collectorVersion": "0.1.0",
+      "dataType": "aggregate_token_usage",
+      "privacy": "monthly-model-aggregates",
+      "summary": {
+        "filesInspected": 1,
+        "usableSessions": 1,
+        "snapshotsFound": 2,
+        "skippedFiles": 0
+      },
+      "buckets": [
+        {
+          "month": "2026-10",
+          "model": "gpt-6.1-sol",
+          "sessions": true,
+          "input_tokens": 100,
+          "cached_input_tokens": 20,
+          "output_tokens": 30,
+          "reasoning_output_tokens": 10,
+          "total_tokens": 130
+        }
+      ]
+    }
+  },
+  {
+    "name": "input_tokens:9007199254740992",
+    "valid": false,
+    "report": {
+      "schemaVersion": 1,
+      "collectorVersion": "0.1.0",
+      "dataType": "aggregate_token_usage",
+      "privacy": "monthly-model-aggregates",
+      "summary": {
+        "filesInspected": 1,
+        "usableSessions": 1,
+        "snapshotsFound": 2,
+        "skippedFiles": 0
+      },
+      "buckets": [
+        {
+          "month": "2026-10",
+          "model": "gpt-6.1-sol",
+          "sessions": 1,
+          "input_tokens": 9007199254740992,
+          "cached_input_tokens": 20,
+          "output_tokens": 30,
+          "reasoning_output_tokens": 10,
+          "total_tokens": 130
+        }
+      ]
+    }
+  },
+  {
+    "name": "cached_input_tokens:101",
+    "valid": false,
+    "report": {
+      "schemaVersion": 1,
+      "collectorVersion": "0.1.0",
+      "dataType": "aggregate_token_usage",
+      "privacy": "monthly-model-aggregates",
+      "summary": {
+        "filesInspected": 1,
+        "usableSessions": 1,
+        "snapshotsFound": 2,
+        "skippedFiles": 0
+      },
+      "buckets": [
+        {
+          "month": "2026-10",
+          "model": "gpt-6.1-sol",
+          "sessions": 1,
+          "input_tokens": 100,
+          "cached_input_tokens": 101,
+          "output_tokens": 30,
+          "reasoning_output_tokens": 10,
+          "total_tokens": 130
+        }
+      ]
+    }
+  },
+  {
+    "name": "total_tokens:129",
+    "valid": false,
+    "report": {
+      "schemaVersion": 1,
+      "collectorVersion": "0.1.0",
+      "dataType": "aggregate_token_usage",
+      "privacy": "monthly-model-aggregates",
+      "summary": {
+        "filesInspected": 1,
+        "usableSessions": 1,
+        "snapshotsFound": 2,
+        "skippedFiles": 0
+      },
+      "buckets": [
+        {
+          "month": "2026-10",
+          "model": "gpt-6.1-sol",
+          "sessions": 1,
+          "input_tokens": 100,
+          "cached_input_tokens": 20,
+          "output_tokens": 30,
+          "reasoning_output_tokens": 10,
+          "total_tokens": 129
+        }
+      ]
+    }
+  },
+  {
+    "name": "snapshotsFound",
+    "valid": false,
+    "report": {
+      "schemaVersion": 1,
+      "collectorVersion": "0.1.0",
+      "dataType": "aggregate_token_usage",
+      "privacy": "monthly-model-aggregates",
+      "summary": {
+        "filesInspected": 1,
+        "usableSessions": 1,
+        "snapshotsFound": 0,
+        "skippedFiles": 0
+      },
+      "buckets": [
+        {
+          "month": "2026-10",
+          "model": "gpt-6.1-sol",
+          "sessions": 1,
+          "input_tokens": 100,
+          "cached_input_tokens": 20,
+          "output_tokens": 30,
+          "reasoning_output_tokens": 10,
+          "total_tokens": 130
+        }
+      ]
+    }
+  },
+  {
+    "name": "skippedFiles",
+    "valid": false,
+    "report": {
+      "schemaVersion": 1,
+      "collectorVersion": "0.1.0",
+      "dataType": "aggregate_token_usage",
+      "privacy": "monthly-model-aggregates",
+      "summary": {
+        "filesInspected": 1,
+        "usableSessions": 1,
+        "snapshotsFound": 2,
+        "skippedFiles": 1
+      },
+      "buckets": [
+        {
+          "month": "2026-10",
+          "model": "gpt-6.1-sol",
+          "sessions": 1,
+          "input_tokens": 100,
+          "cached_input_tokens": 20,
+          "output_tokens": 30,
+          "reasoning_output_tokens": 10,
+          "total_tokens": 130
+        }
+      ]
+    }
+  },
+  {
+    "name": "usableSessions",
+    "valid": false,
+    "report": {
+      "schemaVersion": 1,
+      "collectorVersion": "0.1.0",
+      "dataType": "aggregate_token_usage",
+      "privacy": "monthly-model-aggregates",
+      "summary": {
+        "filesInspected": 1,
+        "usableSessions": 2,
+        "snapshotsFound": 2,
+        "skippedFiles": 0
+      },
+      "buckets": [
+        {
+          "month": "2026-10",
+          "model": "gpt-6.1-sol",
+          "sessions": 1,
+          "input_tokens": 100,
+          "cached_input_tokens": 20,
+          "output_tokens": 30,
+          "reasoning_output_tokens": 10,
+          "total_tokens": 130
+        }
+      ]
+    }
+  },
+  {
+    "name": "version newline",
+    "valid": false,
+    "report": {
+      "schemaVersion": 1,
+      "collectorVersion": "0.1.0\n",
+      "dataType": "aggregate_token_usage",
+      "privacy": "monthly-model-aggregates",
+      "summary": {
+        "filesInspected": 1,
+        "usableSessions": 1,
+        "snapshotsFound": 2,
+        "skippedFiles": 0
+      },
+      "buckets": [
+        {
+          "month": "2026-10",
+          "model": "gpt-6.1-sol",
+          "sessions": 1,
+          "input_tokens": 100,
+          "cached_input_tokens": 20,
+          "output_tokens": 30,
+          "reasoning_output_tokens": 10,
+          "total_tokens": 130
+        }
+      ]
+    }
+  },
+  {
+    "name": "boolean schema",
+    "valid": false,
+    "report": {
+      "schemaVersion": true,
+      "collectorVersion": "0.1.0",
+      "dataType": "aggregate_token_usage",
+      "privacy": "monthly-model-aggregates",
+      "summary": {
+        "filesInspected": 1,
+        "usableSessions": 1,
+        "snapshotsFound": 2,
+        "skippedFiles": 0
+      },
+      "buckets": [
+        {
+          "month": "2026-10",
+          "model": "gpt-6.1-sol",
+          "sessions": 1,
+          "input_tokens": 100,
+          "cached_input_tokens": 20,
+          "output_tokens": 30,
+          "reasoning_output_tokens": 10,
+          "total_tokens": 130
+        }
+      ]
+    }
+  },
+  {
+    "name": "unsafe bucket token sum",
+    "valid": false,
+    "report": {
+      "schemaVersion": 1,
+      "collectorVersion": "0.1.0",
+      "dataType": "aggregate_token_usage",
+      "privacy": "monthly-model-aggregates",
+      "summary": {
+        "filesInspected": 1,
+        "usableSessions": 1,
+        "snapshotsFound": 2,
+        "skippedFiles": 0
+      },
+      "buckets": [
+        {
+          "month": "2026-10",
+          "model": "gpt-6.1-sol",
+          "sessions": 1,
+          "input_tokens": 9007199254740991,
+          "cached_input_tokens": 20,
+          "output_tokens": 30,
+          "reasoning_output_tokens": 10,
+          "total_tokens": 0
+        }
+      ]
+    }
+  }
+]
