@@ -7,8 +7,14 @@ from collections import defaultdict
 from datetime import datetime, timezone
 import json
 import os
+import re
 from pathlib import Path
 import sys
+
+if __package__:
+    from .validate_report import InvalidReport, MAX_BYTES, validate
+else:
+    from validate_report import InvalidReport, MAX_BYTES, validate
 
 SCHEMA_VERSION = 1
 MAX_LINE_BYTES = 2_000_000
@@ -17,13 +23,13 @@ TOKEN_FIELDS = ("input_tokens", "cached_input_tokens", "output_tokens", "reasoni
 
 
 def nonnegative_int(value: object) -> int | None:
-    return value if isinstance(value, int) and not isinstance(value, bool) and value >= 0 else None
+    return value if isinstance(value, int) and not isinstance(value, bool) and 0 <= value <= 2**53 - 1 else None
 
 
 def safe_model(value: object) -> str:
     if not isinstance(value, str) or not value or len(value) > 80:
         return "unknown"
-    return value if all(c.isalnum() or c in "._-" for c in value) else "unknown"
+    return value if re.fullmatch(r"[A-Za-z0-9._-]{1,80}", value) else "unknown"
 
 
 def month_of(value: object) -> str | None:
@@ -43,6 +49,7 @@ def extract(path: Path) -> tuple[dict | None, int]:
     model = "unknown"
     month = None
     snapshots = 0
+    latest_model = "unknown"
     try:
         if path.stat().st_size > MAX_FILE_BYTES:
             return None, 0
@@ -73,16 +80,31 @@ def extract(path: Path) -> tuple[dict | None, int]:
                 parsed = {key: nonnegative_int(totals.get(key)) for key in TOKEN_FIELDS}
                 if any(parsed[k] is None for k in ("input_tokens", "output_tokens")):
                     continue
+                if any(totals.get(key) is not None and parsed[key] is None for key in TOKEN_FIELDS):
+                    continue
+                # Optional telemetry may be absent, rather than numeric zero.
+                parsed["cached_input_tokens"] = parsed["cached_input_tokens"] or 0
+                parsed["reasoning_output_tokens"] = parsed["reasoning_output_tokens"] or 0
+                parsed["total_tokens"] = parsed["total_tokens"] or (parsed["input_tokens"] + parsed["output_tokens"])
+                if (parsed["cached_input_tokens"] > parsed["input_tokens"] or
+                    parsed["reasoning_output_tokens"] > parsed["output_tokens"] or
+                    parsed["total_tokens"] < parsed["input_tokens"] + parsed["output_tokens"] or
+                    parsed["total_tokens"] > 2**53 - 1):
+                    continue
+                snapshot_month = month_of(record.get("timestamp"))
+                if snapshot_month is None:
+                    continue
                 # Snapshots are cumulative for a session, so never sum them.
-                if latest is None or parsed.get("total_tokens", 0) >= latest.get("total_tokens", 0):
+                if latest is None or parsed["total_tokens"] >= latest["total_tokens"]:
                     latest = parsed
+                    month = snapshot_month
+                    latest_model = model
                 snapshots += 1
-                month = month_of(record.get("timestamp")) or month
     except (OSError, PermissionError):
         return None, 0
     if latest is None or month is None:
         return None, snapshots
-    return {"month": month, "model": model, "tokens": latest}, snapshots
+    return {"month": month, "model": latest_model, "tokens": latest}, snapshots
 
 
 def export(sessions_dir: Path) -> dict:
@@ -109,7 +131,7 @@ def export(sessions_dir: Path) -> dict:
                for month, model in sorted(aggregate)]
     return {
         "schemaVersion": SCHEMA_VERSION,
-        "collectorVersion": "0.1.0",
+        "collectorVersion": "0.1.1",
         "dataType": "aggregate_token_usage",
         "privacy": "monthly-model-aggregates",
         "summary": {
@@ -131,14 +153,23 @@ def main() -> int:
         print("No Codex sessions directory found; no report written.", file=sys.stderr)
         return 2
     result = export(args.sessions_dir)
+    if result["summary"]["usableSessions"]:
+        try:
+            validate(result)
+        except InvalidReport as exc:
+            print(f"Aggregate cannot be contributed: {exc}. No report written.", file=sys.stderr)
+            return 2
+    serialized = json.dumps(result, indent=2, ensure_ascii=True) + "\n"
+    if len(serialized.encode("utf-8")) > MAX_BYTES:
+        print("Aggregate exceeds the 256 KB report limit. No report written.", file=sys.stderr)
+        return 2
     destination = args.output.expanduser().resolve()
     if destination.exists():
         print("Output already exists. Choose a new path to avoid overwriting.", file=sys.stderr)
         return 2
     destination.parent.mkdir(parents=True, exist_ok=True)
     with destination.open("x", encoding="utf-8") as handle:
-        json.dump(result, handle, indent=2, ensure_ascii=True)
-        handle.write("\n")
+        handle.write(serialized)
     print(f"Saved {destination}")
     print(json.dumps(result["summary"], indent=2))
     if not result["summary"]["usableSessions"]:

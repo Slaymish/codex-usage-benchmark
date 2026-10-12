@@ -18,7 +18,7 @@ This scans `~/.codex/sessions` (or `$CODEX_HOME/sessions`). To specify a differe
 python3 scripts/export_usage.py --sessions-dir /path/to/sessions --output codex-usage-report.json
 ```
 
-**Review the JSON before sharing it.** The report contains aggregate monthly token counts by model and session counts; it does not include prompts, transcripts or filenames. It is not guaranteed anonymous. No automatic upload or contribution endpoint exists yet.
+**Review the JSON before sharing it.** The report contains aggregate monthly token counts by model and session counts; it does not include prompts, transcripts or filenames. It is not guaranteed anonymous. The exporter never uploads automatically. The website contributor flow is under review and production submissions remain disabled. See [contribution status](docs/report-validation.md).
 
 The exporter intentionally does not estimate Codex quotas or costs from tokens. Its data is a starting point for benchmarking, not sufficient evidence to optimise subscriptions. See [privacy and measurement notes](docs/privacy.md).
 
@@ -32,4 +32,4 @@ python3 -m unittest discover -s tests -v
 
 ## Status
 
-Prototype exporter and skill. Planned next: verify Codex telemetry compatibility against consenting test data, strengthen model attribution and privacy, then implement explicit user-reviewed uploads and aggregate statistics.
+Offline exporter, skill and strict validator. The companion website PR implements verified GitHub ownership, explicit profile consent and withdrawal, but still requires real deployed OAuth/storage checks before launch. No empirical quota or public statistical dataset is claimed. See [architecture](ARCHITECTURE.md).

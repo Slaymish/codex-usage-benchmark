@@ -48,6 +48,19 @@ class ValidationTests(unittest.TestCase):
         with self.assertRaises(InvalidReport):
             validate(item)
 
+class SharedContractTests(unittest.TestCase):
+    def test_shared_website_validation_cases(self):
+        import json
+        from pathlib import Path
+        cases = json.loads((Path(__file__).parent / "fixtures" / "report-validation.json").read_text())
+        for case in cases:
+            with self.subTest(case=case["name"]):
+                if case["valid"]:
+                    validate(case["report"])
+                else:
+                    with self.assertRaises(InvalidReport):
+                        validate(case["report"])
+
 
 if __name__ == "__main__":
     unittest.main()
